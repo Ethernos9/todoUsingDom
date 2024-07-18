@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let key = 0;
+        function markAsDone(todoId){
+                const parent = document.getElementById(todoId)
+                parent.children[2].innerHTML ="Done!"
+        }
+
+        function createChild(title,description,key){
+            console.log(key)
+            const child = document.createElement("div")
+
+            const first = document.createElement("div")
+            first.innerHTML = title
+            const second = document.createElement("div")
+            second.innerHTML = description
+            const mark = document.createElement("button")
+            mark.innerHTML = "mark as done"
+            mark.setAttribute("onclick",`markAsDone(${key})`)
+            child.appendChild(first)
+            child.appendChild(second)
+            child.appendChild(mark)
+            child.setAttribute("id",key)
+            return child
+        }
+        function addTodo (){
+            const title = document.getElementById("title").value
+            const description = document.getElementById("description").value
+            console.log(title, description)
+            const parent= document.getElementById("container")
+            parent.appendChild(createChild(title,description,key++))
+
+        }
+    </script>
+
+    <div>
+        <input id = "title" type="text" placeholder="title">
+        <input id = "description" type="text" placeholder="description">
+        <button onclick=addTodo()>addTodo</button>
+    </div>
+
+    <div id="container"></div>
+</body>
+</html>
